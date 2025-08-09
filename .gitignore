@@ -57,3 +57,6 @@ out/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+### environment variables ###
+.env
