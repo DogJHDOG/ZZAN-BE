@@ -1,4 +1,4 @@
-package com.zzan.zzan.config
+package com.zzan.zzan.common.config
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect
 import com.fasterxml.jackson.annotation.PropertyAccessor
