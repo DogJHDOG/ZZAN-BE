@@ -17,6 +17,7 @@ interface LiquorQueryRepository : JpaRepository<Liquor, String> {
                 l.id,
                 l.name,
                 l.type,
+                l.score,
                 l.description,
                 l.food_pairing,
                 l.volume,
