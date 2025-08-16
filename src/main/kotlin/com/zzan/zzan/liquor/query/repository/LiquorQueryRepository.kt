@@ -11,24 +11,14 @@ import org.springframework.stereotype.Repository
 interface LiquorQueryRepository : JpaRepository<Liquor, String> {
 
     @Query(
-        nativeQuery = true,
-        value = """
-            SELECT
-                l.id,
-                l.name,
-                l.type,
-                l.score,
-                l.description,
-                l.food_pairing,
-                l.volume,
-                l.content,
-                l.awards,
-                l.etc,
-                l.image_url,
-                l.brewery
-            FROM liquors l
-            WHERE l.id = :id
-        """,
+        """
+        SELECT new com.zzan.zzan.api.liquor.dto.LiquorDetailResponse(
+            l.id, l.name, l.type, l.score, l.description,
+            l.foodPairing, l.volume, l.content, l.awards,
+            l.etc, l.imageUrl, l.brewery
+        )
+        FROM Liquor l WHERE l.id = :id
+        """
     )
     fun getLiquorById(id: String): LiquorDetailResponse?
 }
