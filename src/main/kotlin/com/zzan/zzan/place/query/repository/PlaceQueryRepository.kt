@@ -5,6 +5,7 @@ import com.zzan.zzan.place.command.domain.Place
 import com.zzan.zzan.place.command.domain.vo.ViewBox
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
+import org.springframework.data.repository.query.Param
 
 interface PlaceQueryRepository : JpaRepository<Place, Long> {
     @Query(
@@ -14,8 +15,10 @@ interface PlaceQueryRepository : JpaRepository<Place, Long> {
             p.address, p.phone, p.longitude, p.latitude
         )
         FROM Place p 
-        WHERE within(p.location, envelope(:minLng, :minLat, :maxLng, :maxLat)) = true
+        WHERE function('ST_Within', p.location, 
+               function('ST_MakeEnvelope', :#{#viewBox.minLongitude.value}, :#{#viewBox.minLatitude.value}, 
+                                          :#{#viewBox.maxLongitude.value}, :#{#viewBox.maxLatitude.value}, 4326)) = true
     """
     )
-    fun findPlacesByViewBox(viewBox: ViewBox): List<PlaceResponse>
+    fun findPlacesByViewBox(@Param("viewBox") viewBox: ViewBox): List<PlaceResponse>
 }
