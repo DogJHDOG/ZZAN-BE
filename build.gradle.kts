@@ -59,6 +59,8 @@ dependencies {
     testImplementation("org.testcontainers:testcontainers:1.20.4")
     testImplementation("org.testcontainers:postgresql:1.20.4")
     testImplementation("org.testcontainers:junit-jupiter:1.20.4")
+    implementation("org.hibernate:hibernate-spatial:6.2.7.Final")
+    implementation("org.hibernate:hibernate-spatial:5.6.15.Final")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
