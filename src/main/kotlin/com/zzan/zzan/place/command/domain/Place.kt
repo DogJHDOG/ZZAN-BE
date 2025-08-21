@@ -33,5 +33,5 @@ class Place(
     @Column(
         columnDefinition = "geometry(Point, 4326) GENERATED ALWAYS AS (ST_SetSRID(ST_MakePoint(longitude, latitude), 4326)) STORED"
     )
-    val location: Point, // 장소 위치 (경도, 위도)
+    val location: Point? = null, // 장소 위치 (경도, 위도)
 )
