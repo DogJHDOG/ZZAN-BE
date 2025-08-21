@@ -5,15 +5,16 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
 import org.springframework.boot.runApplication
 import org.springframework.cache.annotation.EnableCaching
+import org.springframework.context.annotation.ComponentScan
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing
 
 
 @EnableCaching
 @EnableJpaAuditing
-@SpringBootApplication(exclude = [
-    SecurityAutoConfiguration::class,
-    UserDetailsServiceAutoConfiguration::class
-])
+@SpringBootApplication(
+    exclude = [SecurityAutoConfiguration::class, UserDetailsServiceAutoConfiguration::class],
+    scanBasePackages = ["com.zzan.zzan"]
+)
 class ZzanApplication
 
 fun main(args: Array<String>) {
