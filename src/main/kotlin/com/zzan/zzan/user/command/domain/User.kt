@@ -20,7 +20,7 @@ class User(
     @Column(name = "profile_image_url")
     val profileImageUrl: String? = null, // 프로필 이미지 URL
 
-    val nickname: String, // 사용자 닉네임
+    val nickname: String? = null, // 사용자 닉네임
 
     @Enumerated(EnumType.STRING)
     val role: UserRole = UserRole.USER,
