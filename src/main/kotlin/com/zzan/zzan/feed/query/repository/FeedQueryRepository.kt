@@ -47,7 +47,60 @@ interface FeedQueryRepository : JpaRepository<Feed, String> {
     fun getFeeds(@Param("criteria") criteria: FeedSearchCriteria, pageable: Pageable): Page<Feed>
 
     /**
-     * 단순한 존재 여부 확인용 메서드
+     * 피드 존재 여부 확인
      */
     fun existsByIdAndDeletedAtIsNull(feedId: String): Boolean
+
+    /**
+     * 사용자별 피드 개수 조회
+     */
+    fun countByUserIdAndDeletedAtIsNull(userId: String): Long
+
+    /**
+     * 장소별 피드 개수 조회
+     */
+    fun countByPlaceIdAndDeletedAtIsNull(placeId: String): Long
+
+    /**
+     * 텍스트 검색 - 피드 내용에서 검색
+     */
+    @Query("""
+        SELECT f FROM Feed f
+        WHERE f.deletedAt IS NULL
+        AND (f.text LIKE %:query% OR f.text IS NULL)
+    """)
+    fun searchFeedsByText(@Param("query") query: String, pageable: Pageable): Page<Feed>
+
+    /**
+     * 사용자 ID로 피드 조회 (추가 최적화용)
+     */
+    @Query("""
+        SELECT f FROM Feed f
+        WHERE f.userId = :userId AND f.deletedAt IS NULL
+    """)
+    fun findByUserIdAndDeletedAtIsNull(@Param("userId") userId: String, pageable: Pageable): Page<Feed>
+
+    /**
+     * 장소 ID로 피드 조회 (추가 최적화용)
+     */
+    @Query("""
+        SELECT f FROM Feed f
+        WHERE f.placeId = :placeId AND f.deletedAt IS NULL
+    """)
+    fun findByPlaceIdAndDeletedAtIsNull(@Param("placeId") placeId: String, pageable: Pageable): Page<Feed>
+
+    /**
+     * 평점 범위로 피드 조회 (추가 최적화용)
+     */
+    @Query("""
+        SELECT f FROM Feed f
+        WHERE f.deletedAt IS NULL
+        AND (:minScore IS NULL OR f.score >= :minScore)
+        AND (:maxScore IS NULL OR f.score <= :maxScore)
+    """)
+    fun findByScoreRangeAndDeletedAtIsNull(
+        @Param("minScore") minScore: Double?,
+        @Param("maxScore") maxScore: Double?,
+        pageable: Pageable
+    ): Page<Feed>
 }

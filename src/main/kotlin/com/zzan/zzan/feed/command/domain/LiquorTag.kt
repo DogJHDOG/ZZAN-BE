@@ -27,10 +27,11 @@ data class LiquorTag(
 
     val score: Double? = null,
 
-    @Column(precision = 10, scale = 8)
+    // columnDefinition으로 정확한 SQL 타입 지정
+    @Column(columnDefinition = "DECIMAL(10,8)")
     val tagX: Double,
 
-    @Column(precision = 10, scale = 8)
+    @Column(columnDefinition = "DECIMAL(10,8)")
     val tagY: Double
 ) {
     // JPA 요구사항을 위한 기본 생성자
