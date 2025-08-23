@@ -3,7 +3,7 @@ package com.zzan.zzan.api.feed
 import com.zzan.zzan.api.feed.dto.*
 import com.zzan.zzan.common.response.ApiResponse
 import com.zzan.zzan.feed.command.service.FeedService
-import com.zzan.zzan.feed.query.service.FeedQueryService
+import com.zzan.zzan.feed.query.FeedQueryService
 import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDateTime

@@ -1,4 +1,4 @@
-package com.zzan.zzan.feed.query.service
+package com.zzan.zzan.feed.query
 
 import com.zzan.zzan.api.feed.dto.*
 
