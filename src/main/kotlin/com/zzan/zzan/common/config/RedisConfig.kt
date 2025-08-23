@@ -18,12 +18,14 @@ import org.springframework.data.redis.serializer.StringRedisSerializer
 class RedisConfig {
 
     @Bean
-    fun redisTemplate(connectionFactory: RedisConnectionFactory): RedisTemplate<String, Any> {
+    fun redisTemplate(
+        connectionFactory: RedisConnectionFactory
+    ): RedisTemplate<String, Any> {
         val template = RedisTemplate<String, Any>()
         template.connectionFactory = connectionFactory
 
         // JSON Serializer 설정
-        val jackson2JsonRedisSerializer = GenericJackson2JsonRedisSerializer(objectMapper())
+        val jackson2JsonRedisSerializer = GenericJackson2JsonRedisSerializer(redisObjectMapper())
         template.keySerializer = StringRedisSerializer()
         template.hashKeySerializer = StringRedisSerializer()
         template.valueSerializer = jackson2JsonRedisSerializer
@@ -39,8 +41,8 @@ class RedisConfig {
         return StringRedisTemplate(connectionFactory)
     }
 
-    @Bean
-    fun objectMapper(): ObjectMapper {
+    @Bean("redisObjectMapper")
+    fun redisObjectMapper(): ObjectMapper {
         return ObjectMapper().apply {
             // Kotlin 지원을 위한 모듈 등록
             registerKotlinModule()
