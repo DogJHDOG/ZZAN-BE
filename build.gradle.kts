@@ -60,7 +60,6 @@ dependencies {
     testImplementation("org.testcontainers:postgresql:1.20.4")
     testImplementation("org.testcontainers:junit-jupiter:1.20.4")
     implementation("org.hibernate:hibernate-spatial:6.2.7.Final")
-    implementation("org.hibernate:hibernate-spatial:5.6.15.Final")
 
     implementation ("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
 
