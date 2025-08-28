@@ -44,8 +44,6 @@ services:
             - POSTGRES_USER=${POSTGRES_USER}
             - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
             - POSTGRES_DB=${POSTGRES_DB}
-            - SECURITY_ID=${SECURITY_ID:-admin}
-            - SECURITY_PW=${SECURITY_PW:-1234}
             - SECURITY_ROLE=${SECURITY_ROLE:-USER}
             - AWS_ACCESS_KEY=${AWS_ACCESS_KEY}
             - AWS_SECRET_KEY=${AWS_SECRET_KEY}
